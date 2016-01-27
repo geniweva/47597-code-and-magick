@@ -1,34 +1,31 @@
 
-function getMessage(a, b) {
-    var resultType = typeof a;
-    var resultType_2 = typeof b; 
-    var sum = 0; var itog = 0;
-    var distance = 0;
+   
+function getMessage(a, b){
+   var sum = 0;
+   var message = 0;
     
-   if(resultType == typeof 0) {
-       alert('Я прыгнул на ' + '' + (a * 100) + ' см');
+   if((typeof a) == "Boolean"){
+       if(a == true){
+           message = 'Я попал в' + ' ' + b;
+       }
+       else{
+           message = 'Я никуда не попал';
+       }
    }
-    else if(resultType == typeof true){
-        if(a == true){
-            alert('Я попал в ' + b);
+   else(if((typeof a) == 'Number')){
+       message = 'Я прыгнул на ' + '' + (a * 100) + 'сантиметров';
+   }
+   else(if((typeof a) == 'Object')){
+       for(var i = 0; i < a.length; i++){
+        var sum = sum + a[i]; 
+     }
+       message = 'Я прошел ' + sum + ' шагов';
+   }
+   else(if((typeof a == 'Object')) && ((typeof b)) == 'Object'){
+       for(var n = 0; n < a.length && n < b.length; n++){
+                sum = sum + (a[n]*b[n]);               
         }
-        else if(a == false){
-             alert('Я никуда не попал');
-        }           
-    }
-    else if(resultType == typeof{} && resultType_2 != typeof{}){
-        for(var i = 0; i < a.length; i++){
-            var sum = sum + a[i]; 
-         }
-        alert('Я прошел ' + '' + sum + '' + ' шагов'); 
-    }   
-    else if(resultType == typeof{} && resultType_2 == typeof{}){
-        for(var n = 0; n < a.length && n < b.length; n++){
-                distance = distance + (a[n]*b[n]);               
-        }
-        alert('Я прошел ' + '' + distance + ' метров');
-        
-    }     
-}   
-
-getMessage([10,20,30], [10,20,30]);
+       message = 'Я прошел ' + sum + 'метров'; 
+   }            
+   return message; 
+};
