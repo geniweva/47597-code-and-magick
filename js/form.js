@@ -37,9 +37,10 @@
       for (var i = 0; i < elems.length; i++){
           elems[i].onclick = function(){
               if(elems[i].innerText == elem_1.value || elems[i].innerText == elem_2.value){
-                 fieldText.required = "true";
-                  
-              }
+                 fieldText.required = "true";          
+              }else{
+                fieldText.required = "false";    
+              } 
               
           }
       }
