@@ -15,42 +15,51 @@
     var elems = document.querySelectorAll('.review-mark-label');
     var fieldName = document.querySelector('#review-name');
     var fieldText = document.querySelector('#review-text');
+    var block = document.querySelector('.review-fields');
+    var rating;
     
     
     myBut.disabled = 'true';
     fieldName.required = 'true';
     leftText.classList.add('invisible');
     
-    for (var i = 0; i < elems.length; i++){
-          elems[i].onclick = function(){
-            var rating = this.innerHTML;
-            if(rating < 3){
-                if(!validText() ){
-                    leftText.classList.remove('invisible');
-		     myBut.disabled = 'true';	
-		     fieldText.required = 'true'; 		
-            	 
-                }
-		if(!validName() ){
-                    leftName.classList.remove('invisible');
-            	    myBut.disabled = 'true';	
-                }     
-            }          
-               else if(rating >= 3){             
-			leftText.classList.add('invisible');
-			leftName.classList.remove('invisible');					                                         
-                }       
-          }      
-   }
+for(var i = 0; i < elems.length; i++){
+  elems[i].onclick = function(){
+    rating = this.innerHTML;
+    if(rating < 3){
+        if(!validText() ){                          // если рейтинг < 3 и пустое поле текст
+            leftText.classList.remove('invisible');// добавляем осталось заполнить отзыв
+            myBut.disabled = 'true';	           // кнопку блокируем
+            fieldText.required = 'true'; 		   // делаем обязательным текстовое поле
+
+        }
+    if(!validName() ){                                    //если поле имя пусто
+            leftName.classList.remove('invisible');       //добавляем осталось заполнить имя
+            myBut.disabled = 'true';	                  // кнопку блокируем
+            }     
+        }else if(rating >= 3){             
+             leftText.classList.add('invisible');
+          }       
+    }      
+}
+
     
 fieldName.oninput = function(){
     leftName.classList.add('invisible');
-    myBut.removeAttribute('disabled');
+     myBut.removeAttribute('disabled');
+    if(validName() === false){
+        leftName.classList.remove('invisible'); 
+        myBut.disabled = 'true';
+    }
 }
 
 fieldText.oninput = function(){
     leftText.classList.add('invisible');
-    myBut.removeAttribute('disabled');
+     myBut.removeAttribute('disabled');
+    if(validText() === false){
+        leftText.classList.remove('invisible'); 
+         myBut.disabled = 'true';
+    }
 }	  
 
 function validName() {
@@ -69,6 +78,7 @@ function validText() {
     }
 }
 
+    
 myBut.onsubmit = function(event){
      event.preventDefault();
     var birthday = new Date('2016-01-07');
