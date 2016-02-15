@@ -87,11 +87,12 @@ myBut.onsubmit = function(event){
     var formatDateExpire = new Date(dateExpire).toUTCString();
     
     document.cookie = 'userName=' + fieldName.value + ';expires=' + formatDateExpire;
+    document.cookie = 'userValue' + rating + ';expires=' + formatDateExpire;
     myBut.submit();
 }    
     
     fieldName.value = docCookies.getItem('fieldName');
-    
+    rating = docCookies.getItem('rating');
     
     
   formCloseButton.onclick = function(evt) {
